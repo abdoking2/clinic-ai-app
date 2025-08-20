@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
@@ -38,3 +39,4 @@ def predict():
 if __name__ == "__main__":
     # مهم في Render: لازم نحدد host="0.0.0.0"
     app.run(host="0.0.0.0", port=5000, debug=True)
+
