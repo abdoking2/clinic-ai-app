@@ -3,10 +3,12 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    return "🚀 Clinic AI App is running!"
+app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return jsonify({"message": "Clinic AI running"})
+    
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
@@ -39,4 +41,5 @@ def predict():
 if __name__ == "__main__":
     # مهم في Render: لازم نحدد host="0.0.0.0"
     app.run(host="0.0.0.0", port=5000, debug=True)
+
 
