@@ -3,12 +3,12 @@ from flask import Flask, request, jsonify, send_file
 
 app = Flask(__name__)
 
-# الصفحة الرئيسية - تعرض ملف index.html الموجود بجانب app.py
+# الصفحة الرئيسية: تعرض index.html الموجود بجانب app.py
 @app.route("/")
 def home():
     return send_file("index.html")
 
-# مثال: API للتوقع (ممكن تعدله حسب احتياجاتك)
+# مثال API للتجربة
 @app.route("/predict", methods=["POST"])
 def predict():
     data = request.json
