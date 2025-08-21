@@ -1,16 +1,15 @@
 import os
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, send_file
 
-# إنشاء تطبيق Flask
 app = Flask(__name__)
 
-# الصفحة الرئيسية (واجهة الويب)
-@app.route('/')
+# الصفحة الرئيسية - تعرض ملف index.html الموجود بجانب app.py
+@app.route("/")
 def home():
-    return render_template("index.html")
+    return send_file("index.html")
 
-# API للتجربة (مثال بسيط للتشخيص)
-@app.route('/predict', methods=['POST'])
+# مثال: API للتوقع (ممكن تعدله حسب احتياجاتك)
+@app.route("/predict", methods=["POST"])
 def predict():
     data = request.json
     symptoms = data.get("symptoms", "").lower()
@@ -20,7 +19,7 @@ def predict():
         recommendation = "Rest + Flu Medication"
     elif "headache" in symptoms:
         diagnosis = "Migraine"
-        recommendation = "Painkiller + Rest"
+        recommendation = "Painkillers + Rest"
     else:
         diagnosis = "Unknown"
         recommendation = "Consult a doctor"
@@ -30,7 +29,6 @@ def predict():
         "recommendation": recommendation
     })
 
-# تشغيل محلي
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
